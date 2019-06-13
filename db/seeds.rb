@@ -5,24 +5,52 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+users = [
+	{
+		"name" => "Bill",
+		"email" => "bill@bill.com",
+		"password" => "password"
+	},
+    {
+		"name" => "Lass",
+		"email" => "lass@lass.com",
+		"password" => "password"
+	},
+    {
+		"name" => "Red",
+		"email" => "red@red.com",
+		"password" => "password"
+	}
+]
+
+users.each do |x|
+	user = User.create(name: x["name"], email: x["email"], password: x["password"])
+end
+
 pokes = [
 	{
 		"name" => "Bulbasaur",
 		"location" => "Professor Oak",
-		"found" => "Yes"
+		"found" => "Yes",
+		"user_id" => 1
 	},
     {
 		"name" => "Pikachu",
 		"location" => "Viridian Forest",
-		"found" => "Not Found"
+		"found" => "Not Found",
+		"user_id" => 2
 	},
     {
 		"name" => "Dratini",
 		"location" => "Safari Zone",
-		"found" => "Not Found"
+		"found" => "Not Found",
+		"user_id" => 3
 	}
 ]
 
 pokes.each do |x|
-	poke = Poke.create(name: x["name"], location: x["location"], found: x["found"])
+	poke = Poke.create(name: x["name"], location: x["location"], found: x["found"], user_id: x["user_id"])
 end
+
+
