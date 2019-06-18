@@ -3,7 +3,11 @@ class SessionsController < ApplicationController
 		@user = User.find_by(email: params[:user][:email])
 
 		if @user && @user.authenticate(params[:user][:password])
-			render json: @user 
+			render json: {
+				name: @user.name,
+				email: @user.email,
+				id: @user.id
+			} 
 		else 
 			render json: {
 				error: "Invalid Credentials"
