@@ -3,9 +3,14 @@ class PokesController < ApplicationController
 
   # GET /pokes
   def index
-    @pokes = Poke.all
-
-    render json: @pokes
+    if logged_in? 
+      @pokes = current_user.pokes
+      render json: @pokes, status: :ok
+    else
+      render json: {
+        error: "Must be logged in", status: :unathorized
+      }
+    end
   end
 
   # GET /pokes/1
