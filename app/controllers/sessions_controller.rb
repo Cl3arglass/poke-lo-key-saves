@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 			token = generate_token({id: @user.id})
 
             response = {
-		      user: user_serializer(@user),
+		      user: UserSerializer.new(@user),
 		      jwt: token
 		    }
 
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
   def get_current_user
     if logged_in?
       render json: {
-          user: user_serializer(current_user)
+          user: UserSerializer.new(current_user)
         }, status: :ok
     else
       render json: {error: "No current user"}
