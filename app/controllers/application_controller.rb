@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::API
-	def user_serializer(user)
-	    {
-	      name: user.name,
-	      email: user.email,
-	      id: user.id
-	    }
-	end
+	# def user_serializer(user)
+	#     {
+	#       name: user.name,
+	#       email: user.email,
+	#       id: user.id
+	#     }
+	# end
 
 
 	def current_user
