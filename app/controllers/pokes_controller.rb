@@ -5,7 +5,7 @@ class PokesController < ApplicationController
   def index
     if logged_in? 
       @pokes = current_user.pokes
-      render json: @pokes, status: :ok
+      render json: PokeSerializer.new(@pokes), status: :ok
     else
       render json: {
         error: "Must be logged in", status: :unathorized
