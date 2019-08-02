@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
+  wrap_parameters :user, include: [:name, :email, :password, :password_confirmation]
 
   # GET /users
   def index
@@ -18,9 +19,20 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, status: :created, location: @user
+      # render json: @user, status: :created, location: @user
+      token = generate_token({id: @user.id})
+
+            response = {
+          user: UserSerializer.new(@user),
+          jwt: token
+        }
+
+      render json: response
     else
-      render json: @user.errors, status: :unprocessable_entity
+      response = {
+        error: @user.errors.full_messages.to_sentence
+      }
+      render json: response, status: :unprocessable_entity
     end
   end
 
@@ -46,6 +58,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:email, :password)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 end
