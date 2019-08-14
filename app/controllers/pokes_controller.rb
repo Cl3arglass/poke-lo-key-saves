@@ -20,13 +20,37 @@ class PokesController < ApplicationController
 
   # POST /pokes
   def create
+    
+    # raise "Landed"
+   
     @poke = Poke.new(poke_params)
 
     if @poke.save
       render json: @poke, status: :created, location: @poke
     else
-      render json: @poke.errors, status: :unprocessable_entity
+      response = {
+        error: @poke.errors.full_messages.to_sentence
+      }
+      render json: response, status: :unprocessable_entity
     end
+    #  @user = User.new(user_params)
+
+    # if @user.save
+    #   # render json: @user, status: :created, location: @user
+    #   token = generate_token({id: @user.id})
+
+    #         response = {
+    #       user: UserSerializer.new(@user),
+    #       jwt: token
+    #     }
+
+    #   render json: response
+    # else
+    #   response = {
+    #     error: @user.errors.full_messages.to_sentence
+    #   }
+    #   render json: response, status: :unprocessable_entity
+    # end
   end
 
   # PATCH/PUT /pokes/1
@@ -51,6 +75,6 @@ class PokesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def poke_params
-      params.require(:poke).permit(:name, :location, :found)
+      params.require(:poke).permit(:name, :location, :found, :user_id)
     end
 end
