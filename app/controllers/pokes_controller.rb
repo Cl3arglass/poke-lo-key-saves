@@ -20,13 +20,13 @@ class PokesController < ApplicationController
 
   # POST /pokes
   def create
-    
+
     # raise "Landed"
    
     @poke = Poke.new(poke_params)
 
     if @poke.save
-      render json: @poke, status: :created, location: @poke
+      render json: PokeSerializer.new(@poke), status: :created, location: @poke
     else
       response = {
         error: @poke.errors.full_messages.to_sentence
