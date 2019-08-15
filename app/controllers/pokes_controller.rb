@@ -20,8 +20,6 @@ class PokesController < ApplicationController
 
   # POST /pokes
   def create
-
-    # raise "Landed"
    
     @poke = Poke.new(poke_params)
 
