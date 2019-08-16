@@ -54,9 +54,12 @@ class PokesController < ApplicationController
   # PATCH/PUT /pokes/1
   def update
     if @poke.update(poke_params)
-      render json: @poke
+      render json: PokeSerializer.new(@poke), status: :ok
     else
-      render json: @poke.errors, status: :unprocessable_entity
+       response = {
+        error: @poke.errors.full_messages.to_sentence
+      }
+      render json: response, status: :unprocessable_entity
     end
   end
 
