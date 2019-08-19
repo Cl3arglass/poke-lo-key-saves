@@ -65,7 +65,14 @@ class PokesController < ApplicationController
 
   # DELETE /pokes/1
   def destroy
-    @poke.destroy
+    if @poke.destroy
+      render json: { data: "Poke Removed" }, status: :ok
+    else
+      response = {
+        error: "Poke Not Removed"
+      }
+      render json: response, status: :unprocessable_entity
+    end
   end
 
   private
