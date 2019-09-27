@@ -33,24 +33,27 @@ pokes = [
 		"name" => "Bulbasaur",
 		"location" => "Professor Oak",
 		"found" => "Yes",
+		"likes" => 0,
 		"user_id" => 1
 	},
     {
 		"name" => "Pikachu",
 		"location" => "Viridian Forest",
 		"found" => "Not Found",
+		"likes" => 0,
 		"user_id" => 2
 	},
     {
 		"name" => "Dratini",
 		"location" => "Safari Zone",
 		"found" => "Not Found",
+		"likes" => 0,
 		"user_id" => 3
 	}
 ]
 
 pokes.each do |x|
-	poke = Poke.create(name: x["name"], location: x["location"], found: x["found"], user_id: x["user_id"])
+	poke = Poke.create(name: x["name"], location: x["location"], found: x["found"], likes: x["likes"], user_id: x["user_id"])
 end
 
 
