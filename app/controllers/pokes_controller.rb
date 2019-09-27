@@ -20,7 +20,6 @@ class PokesController < ApplicationController
 
   # POST /pokes
   def create
-   
     @poke = Poke.new(poke_params)
 
     if @poke.save
@@ -83,6 +82,6 @@ class PokesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def poke_params
-      params.require(:poke).permit(:name, :location, :found, :user_id)
+      params.require(:poke).permit(:name, :location, :found, :likes, :user_id)
     end
 end
